@@ -58,7 +58,7 @@ app.use('/auth', require('./routes/auth'));
 // })
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`MVHS Member app listening at http://localhost:${port}`)
 })
 
 
