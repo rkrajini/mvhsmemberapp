@@ -130,7 +130,7 @@ exports.isLoggedIn = async (req, res, next) => {
     try {
       //1) verify the token
       const decoded = await promisify(jwt.verify)(req.cookies.jwt,
-      'mypassword'
+      'mysupersecretpassword'
       );
 
       
@@ -189,7 +189,7 @@ exports.edit = async (req, res) => {
     try {
       //1) verify the token
       const decoded = await promisify(jwt.verify)(req.cookies.jwt,
-      'password'
+      'mysupersecretpassword'
       );
       const id= decoded.id
       const {mobile,email,address1,address2,suburb,postcode,state,country,preferred_name } = req.body;
@@ -334,7 +334,7 @@ exports.passworde = async (req, res) => {
       const {  password, passwordConfirm } = req.body;
 
       const decoded = await promisify(jwt.verify)(req.cookies.jwt,
-        'password'
+        'mysupersecretpassword'
         );
       const id= decoded.id
 
@@ -363,7 +363,7 @@ exports.passworde = async (req, res) => {
         console.log(error);
       } else {
         
-        return res.render('password', {
+        return res.render('mysupersecretpassword', {
           user:req.user,
           message: 'Password changed'
         });
