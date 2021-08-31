@@ -35,7 +35,7 @@ exports.login = async (req, res) => {
       } else {
         const id = results[0].id;
 
-        const token = jwt.sign({ id }, 'password', {
+        const token = jwt.sign({ id }, 'mysupersecretpassword', {
           expiresIn: '60d'
         });
 
