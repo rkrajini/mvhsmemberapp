@@ -58,7 +58,7 @@ db.connect( (error) => {
 // app.use('/auth', require('./routes/auth'));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+   res.redirect('/login');
 })
 
 app.listen(port, () => {
