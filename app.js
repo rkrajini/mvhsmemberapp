@@ -25,10 +25,10 @@ const db = mysql.createConnection({
 
 // app.use(fileUpload());
 
-// const publicDirectory = path.join(__dirname, './public');
-// app.use(express.static(publicDirectory));
-// const uploadDirectory = path.join(__dirname, './upload');
-// app.use(express.static(uploadDirectory));
+const publicDirectory = path.join(__dirname, './public');
+app.use(express.static(publicDirectory));
+const uploadDirectory = path.join(__dirname, './upload');
+app.use(express.static(uploadDirectory));
 
 // // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded({ extended: false }));
