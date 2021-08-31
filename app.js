@@ -52,6 +52,7 @@ db.connect( (error) => {
 //Define Routes
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
+app.use('/auth/login', require('./routes/auth'))
 
 // app.get('/', (req, res) => {
 //    res.redirect('/login');
