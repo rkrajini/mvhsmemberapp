@@ -12,15 +12,15 @@ hbs.registerPartials(__dirname + '/views/partials');
 // view engine setup
 
 
-dotenv.config({ path: './.env'});
+// dotenv.config({ path: './.env'});
 
 const app = express();
 
 const db = mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE
+  host: 'mydatabaseservice.mysql.database.azure.com',
+  user: 'ganesha',
+  password: 'G@nesh@3154',
+  database: 'members'
 });
 
 app.use(fileUpload());
