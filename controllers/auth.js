@@ -31,15 +31,15 @@ exports.login = async (req, res) => {
       } else {
         const id = results[0].id;
 
-        const token = jwt.sign({ id }, process.env.JWT_SECRET, {
-          expiresIn: process.env.JWT_EXPIRES_IN
+        const token = jwt.sign({ id }, 'password', {
+          expiresIn: '60d'
         });
 
         
 
         const cookieOptions = {
           expires: new Date(
-            Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+            Date.now() + 60 * 24 * 60 * 60 * 1000
           ),
           httpOnly: true
         }
@@ -123,7 +123,7 @@ exports.isLoggedIn = async (req, res, next) => {
     try {
       //1) verify the token
       const decoded = await promisify(jwt.verify)(req.cookies.jwt,
-      process.env.JWT_SECRET
+      'mypassword'
       );
 
       
@@ -182,7 +182,7 @@ exports.edit = async (req, res) => {
     try {
       //1) verify the token
       const decoded = await promisify(jwt.verify)(req.cookies.jwt,
-      process.env.JWT_SECRET
+      'password'
       );
       const id= decoded.id
       const {mobile,email,address1,address2,suburb,postcode,state,country,preferred_name } = req.body;
@@ -327,7 +327,7 @@ exports.passworde = async (req, res) => {
       const {  password, passwordConfirm } = req.body;
 
       const decoded = await promisify(jwt.verify)(req.cookies.jwt,
-        process.env.JWT_SECRET
+        'password'
         );
       const id= decoded.id
 
