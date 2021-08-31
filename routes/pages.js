@@ -5,18 +5,18 @@ const router = express.Router();
 
 router.get('/', authController.isLoggedIn,authController.selectallrows, (req, res) => {
 
-//   if (req.admin){
-//     res.render('index',{
+  if (req.admin){
+    res.render('index',{
       
-//       rows:req.rows
-//     });
-//   }
-//   else if(req.user){
-//     res.redirect('/profile');
-//   }
-//   else{
-//   res.redirect('/login');
-//   }
+      rows:req.rows
+    });
+  }
+  else if(req.user){
+    res.redirect('/profile');
+  }
+  else{
+  res.redirect('/login');
+  }
   
   res.redirect('/login');
 });
