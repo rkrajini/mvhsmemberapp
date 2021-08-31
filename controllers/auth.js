@@ -15,7 +15,9 @@ exports.login = async (req, res) => {
   try {
     
     const { email, password } = req.body;
-
+    
+    console.log ("inside Login");
+    
     if( !email || !password ) {
       return res.status(400).render('login', {
         message: 'Please provide an email and password'
@@ -23,6 +25,8 @@ exports.login = async (req, res) => {
     }
 
     db.query('SELECT * FROM members WHERE email = ?', [email], async (error, results) => {
+      
+     console.log("DB Query executed");
       
       if( results.length<=0 || !(await bcrypt.compare(password, results[0].password_digest)) ) {
         res.status(401).render('login', {
