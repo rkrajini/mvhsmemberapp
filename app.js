@@ -25,38 +25,44 @@ const app = express();
 
 // app.use(fileUpload());
 
-const publicDirectory = path.join(__dirname, './public');
-app.use(express.static(publicDirectory));
-const uploadDirectory = path.join(__dirname, './upload');
-app.use(express.static(uploadDirectory));
+// const publicDirectory = path.join(__dirname, './public');
+// app.use(express.static(publicDirectory));
+// const uploadDirectory = path.join(__dirname, './upload');
+// app.use(express.static(uploadDirectory));
 
-// Parse URL-encoded bodies (as sent by HTML forms)
-app.use(express.urlencoded({ extended: false }));
-// Parse JSON bodies (as sent by API clients)
-app.use(express.json());
-app.use(cookieParser());
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-hbs.registerHelper('ifCond', function(a, b, opts) {
-  if (a == b) {
-      return opts.fn(this)
-  } else {
-      return opts.inverse(this)
-  }
-});
-
-// db.connect( (error) => {
-//   if(error) {
-//     console.log(error)
+// // Parse URL-encoded bodies (as sent by HTML forms)
+// app.use(express.urlencoded({ extended: false }));
+// // Parse JSON bodies (as sent by API clients)
+// app.use(express.json());
+// app.use(cookieParser());
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'hbs');
+// hbs.registerHelper('ifCond', function(a, b, opts) {
+//   if (a == b) {
+//       return opts.fn(this)
 //   } else {
-//     console.log("Connected...")
+//       return opts.inverse(this)
 //   }
-// })
+// });
 
-//Define Routes
-app.use('/', require('./routes/pages'));
-app.use('/auth', require('./routes/auth'));
+// // db.connect( (error) => {
+// //   if(error) {
+// //     console.log(error)
+// //   } else {
+// //     console.log("Connected...")
+// //   }
+// // })
+
+// //Define Routes
+// app.use('/', require('./routes/pages'));
+// app.use('/auth', require('./routes/auth'));
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
 app.listen(port, () => {
-  console.log("Server started " );
+  console.log(`Example app listening at http://localhost:${port}`)
 })
+
+
