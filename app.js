@@ -37,13 +37,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-hbs.registerHelper('ifCond', function(a, b, opts) {
-  if (a == b) {
-      return opts.fn(this)
-  } else {
-      return opts.inverse(this)
-  }
-});
+// hbs.registerHelper('ifCond', function(a, b, opts) {
+//   if (a == b) {
+//       return opts.fn(this)
+//   } else {
+//       return opts.inverse(this)
+//   }
+// });
 
 db.connect( (error) => {
   if(error) {
