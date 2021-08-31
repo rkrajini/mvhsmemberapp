@@ -30,20 +30,16 @@ const db = mysql.createConnection({
 // const uploadDirectory = path.join(__dirname, './upload');
 // app.use(express.static(uploadDirectory));
 
-// // // Parse URL-encoded bodies (as sent by HTML forms)
-// app.use(express.urlencoded({ extended: false }));
-// // // Parse JSON bodies (as sent by API clients)
-// app.use(express.json());
-// app.use(cookieParser());
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'hbs');
-// hbs.registerHelper('ifCond', function(a, b, opts) {
-//   if (a == b) {
-//       return opts.fn(this)
-//   } else {
-//       return opts.inverse(this)
-//   }
-// });
+// // Parse URL-encoded bodies (as sent by HTML forms)
+app.use(express.urlencoded({ extended: false }));
+// // Parse JSON bodies (as sent by API clients)
+app.use(express.json());
+app.use(cookieParser());
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+hbs.registerHelper("noop", function(options) {
+  return options.fn(this);
+});
 
 db.connect( (error) => {
   if(error) {
@@ -54,12 +50,12 @@ db.connect( (error) => {
 })
 
 //Define Routes
-// app.use('/', require('./routes/pages'));
-// app.use('/auth', require('./routes/auth'));
+app.use('/', require('./routes/pages'));
+app.use('/auth', require('./routes/auth'));
 
-app.get('/', (req, res) => {
-   res.redirect('/login');
-})
+// app.get('/', (req, res) => {
+//    res.redirect('/login');
+// })
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
