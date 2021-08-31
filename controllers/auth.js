@@ -10,14 +10,15 @@ const db = mysql.createConnection({
   password: 'G@nesh@3154',
   database: 'members'
 });
+const JWT_SECRET = 'mysupersecretpassword'
+const JWT_EXPIRES_IN = '90d'
+const JWT_COOKIE_EXPIRES = 90
 
 exports.login = async (req, res) => {
   try {
     
     const { email, password } = req.body;
-    
-    console.log ("inside Login");
-    
+
     if( !email || !password ) {
       return res.status(400).render('login', {
         message: 'Please provide an email and password'
@@ -26,8 +27,6 @@ exports.login = async (req, res) => {
 
     db.query('SELECT * FROM members WHERE email = ?', [email], async (error, results) => {
       
-     console.log("DB Query executed");
-      
       if( results.length<=0 || !(await bcrypt.compare(password, results[0].password_digest)) ) {
         res.status(401).render('login', {
           message: 'Email or Password is incorrect'
@@ -35,24 +34,21 @@ exports.login = async (req, res) => {
       } else {
         const id = results[0].id;
 
-        const token = jwt.sign({ id }, 'mysupersecretpassword', {
-          expiresIn: '60d'
+        const token = jwt.sign({ id }, JWT_SECRET, {
+          expiresIn: JWT_EXPIRES_IN
         });
 
         
 
         const cookieOptions = {
           expires: new Date(
-            Date.now() + 60 * 24 * 60 * 60 * 1000
+            Date.now() + JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
           ),
           httpOnly: true
         }
 
         res.cookie('jwt', token, cookieOptions );
-        
-        // added by Kadir 
-        
-        res.redirect("/profile");
+        res.status(200).redirect("/");
       }
 
     })
@@ -130,7 +126,7 @@ exports.isLoggedIn = async (req, res, next) => {
     try {
       //1) verify the token
       const decoded = await promisify(jwt.verify)(req.cookies.jwt,
-      'mysupersecretpassword'
+      JWT_SECRET
       );
 
       
@@ -189,7 +185,7 @@ exports.edit = async (req, res) => {
     try {
       //1) verify the token
       const decoded = await promisify(jwt.verify)(req.cookies.jwt,
-      'mysupersecretpassword'
+      JWT_SECRET
       );
       const id= decoded.id
       const {mobile,email,address1,address2,suburb,postcode,state,country,preferred_name } = req.body;
@@ -334,7 +330,7 @@ exports.passworde = async (req, res) => {
       const {  password, passwordConfirm } = req.body;
 
       const decoded = await promisify(jwt.verify)(req.cookies.jwt,
-        'mysupersecretpassword'
+        JWT_SECRET
         );
       const id= decoded.id
 
@@ -363,7 +359,7 @@ exports.passworde = async (req, res) => {
         console.log(error);
       } else {
         
-        return res.render('mysupersecretpassword', {
+        return res.render('password', {
           user:req.user,
           message: 'Password changed'
         });
@@ -736,6 +732,5 @@ exports.rejectnominee=async(req,res)=>{
     }
     });
   }
-
 
 
