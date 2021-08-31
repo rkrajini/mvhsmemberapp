@@ -1,10 +1,10 @@
 const express = require("express");
 const path = require('path');
 const mysql = require("mysql");
-const dotenv = require('dotenv');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
+const port = process.env.PORT || 3000;
 
 //this required before view engine setup
 hbs.registerPartials(__dirname + '/views/partials');
@@ -12,18 +12,18 @@ hbs.registerPartials(__dirname + '/views/partials');
 // view engine setup
 
 
-dotenv.config({ path: './.env'});
+// otenv.config({ path: './.env'});
 
 const app = express();
 
-const db = mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE
-});
+// const db = mysql.createConnection({
+//   host: process.env.DATABASE_HOST,
+//   user: process.env.DATABASE_USER,
+//   password: process.env.DATABASE_PASSWORD,
+//   database: process.env.DATABASE
+// });
 
-app.use(fileUpload());
+// app.use(fileUpload());
 
 const publicDirectory = path.join(__dirname, './public');
 app.use(express.static(publicDirectory));
@@ -45,18 +45,18 @@ hbs.registerHelper('ifCond', function(a, b, opts) {
   }
 });
 
-db.connect( (error) => {
-  if(error) {
-    console.log(error)
-  } else {
-    console.log("Connected...")
-  }
-})
+// db.connect( (error) => {
+//   if(error) {
+//     console.log(error)
+//   } else {
+//     console.log("Connected...")
+//   }
+// })
 
 //Define Routes
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
 
-app.listen(5003, () => {
-  console.log("Server started on Port 5003");
+app.listen(port, () => {
+  console.log("Server started " );
 })
