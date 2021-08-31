@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <nav>
+    <h4>Sri Vakrathunda Vinayagar Temple</h4>
+    <ul>
+      <li><a href="/">Member Management</a></li>
+
+      <li><a href="/nomineetable"> Nominee Management</a></li>
+      
+      <li><a href="/auth/logout">Logout</a></li>
+
+      
+      
+        
+    
+    </ul>
+
+    
+  </nav>
+
+  
+
+  
+
+  {{#if message}}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Close</button>
+</div>
+
+{{/if}}
+
+<div class="row">
+  <div class="col-6">
+    <h1>Nominees</h1>
+  </div>
+  
+
+  <div class="col-md-12">
+    <form class="d-flex" method="POST" action="/auth/searchNominees" class="form-horizontal" novalidate>
+        <div class="col-md-3">
+             <div class="form-group">
+            <label for="search">Search by member no</label>
+            <div class="col-md-12">
+            <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+            </div>
+          </div>
+          </div>
+          
+          
+          
+          <button class="btn btn-primary align-self-center" type="submit">Search</button>
+  </form>
+  </div>
+  
+  
+</div>
+
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Date of Nomination</th>
+      <th scope="col">Member No</th>
+
+      
+      <th scope="col" class="text-end">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {{#each rows}}
+    <tr>
+      <th scope="row">{{this.id}}</th>
+      <td>{{this.firstname}}</td>
+      <td>{{this.lastname}}</td>
+      <td>{{this.dateofnomination}}</td>
+      <td>{{this.Nominatorid}}</td>
+      
+      <td class="text-end">
+        <a href="/approvenominee/{{this.id}}" type="button" class="btn btn-light btn-small"><i class="bi bi-check"></i>
+          Approve</a>
+        <a href="/rejectnominee/{{this.id}}" type="button" class="btn btn-light btn-small"><i class="bi bi-person-x"></i> Reject</a>
+      </td>
+    </tr>
+    {{/each}}
+
+  </tbody>
+</table>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+</body>
+</html>

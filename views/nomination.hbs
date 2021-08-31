@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <nav>
+    <h4>Sri Vakrathunda Vinayagar Temple</h4>
+    <ul>
+      <li><a href="/profile">Profile</a></li>
+      
+      <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header">
+        Nomination Form
+      </div>
+      <div class="card-body">
+        <form action="/auth/nomination/{{user.id}}" method="POST">
+
+        
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required >
+          </div>
+
+          <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" class="form-control" id="firstname" name="firstname" required>
+          </div>
+
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" class="form-control" id="lastname" name="lastname" required >
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+
+          
+
+          
+
+          <div class="form-group">
+            <label for="mobile">HP</label>
+            <input type="number" class="form-control" id="mobile" name="mobile" required>
+          </div>
+          
+         
+
+          <div class="form-group">
+            <label for="DOB">Date of birth</label>
+            <input type="date" class="form-control" id="DOB" name="DOB">
+          </div>
+
+
+
+          <div class="form-group">
+            <label for="address1">Address 1</label>
+            <input type="text" class="form-control" id="address1" name="address1" required>
+          </div>
+
+          <div class="form-group">
+            <label for="address2">Address 2</label>
+            <input type="text" class="form-control" id="address2" name="address2">
+          </div>
+
+          <div class="form-group">
+            <label for="suburb">Suburb</label>
+            <input type="text" class="form-control" id="suburb" name="suburb" required>
+          </div>
+
+          <div class="form-group">
+            <label for="postcode">Postcode</label>
+            <input type="text" class="form-control" id="postcode" name="postcode" required>
+          </div>
+
+          <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" class="form-control" id="state" name="state" required>
+          </div>
+
+          <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country" name="country" required>
+          </div>
+
+          <div class="form-group">
+            <label for="relationship">Relationship</label>
+            <input type="text" class="form-control" id="relationship" name="relationship" required>
+          </div>
+
+          
+
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+      </div>
+    </div>
+
+    {{#if message }}
+      <h4 class="alert alert-danger mt-4">{{message}}</h4>
+    {{/if}}
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+</body>
+</html>

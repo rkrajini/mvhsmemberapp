@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <nav>
+    <h4>Sri Vakrathunda Vinayagar Temple</h4>
+    <ul>
+      
+      <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-4">
+        <div class="card">
+          {{#if user.profile_image}}
+          <div class="avatar-ctn">
+            <img src="/{{user.profile_image}}" class="avatar" alt="user profile picture"/>
+          </div>
+          {{else}}
+          <div class="avatar-ctn">
+            <img src="/avatar.png" class="avatar" alt="user profile picture"/>
+          </div>
+          {{/if}}
+          <div class="card-body">
+            <h5 class="card-title">{{user.firstname}}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+           
+
+
+            <a href="/password" class="btn btn-primary">Change password</a>
+             {{#if user.member_file}}
+              
+            <a href="/download/{{user.id}}" type="button" class="btn btn-primary align-self-center">Download Member document</a>
+              
+
+             {{/if}}
+
+            
+          </div>
+           {{#ifCond user.membertype 'Life Member'}}
+             {{#ifCond user.status 'Active'}}
+            <div class="col-12">
+            <a href="/nomination" class="btn btn-primary">Nominate Someone for transfer</a>
+            </div>
+            {{/ifCond}}
+          {{/ifCond}}
+        </div>
+      </div>
+
+      
+
+      <div class="col-8">
+        <div class="card">
+          <div class="card-header">
+            Profile Page
+          </div>
+          <div class="card-body">
+            
+            <p class="card-text">This is your profile page where you can edit all the information about yourself</p>
+            <form action="/auth/profilepic/{{user.id}}" method="POST" encType="multipart/form-data">
+         <h3>Upload profile picture</h3>
+          <input type="file" name="picFile" accept="image/*" />
+          <input type="submit" class="btn btn-primary">
+          </form>
+          <form action="/auth/edit" method="POST">
+          <div class="form-group">
+            <label for="mobile">HP</label>
+            <input type="number" class="form-control" id="mobile" name="mobile" value= {{user.mobile}} >
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" value={{user.email}}>
+          </div>
+
+          <div class="form-group">
+            <label for="address1">Address 1</label>
+            <input type="text" class="form-control" id="address1" name="address1"value={{user.address1}}>
+          </div>
+
+          <div class="form-group">
+            <label for="address2">Address 2</label>
+            <input type="text" class="form-control" id="address2" name="address2"value={{user.address2}}>
+          </div>
+
+          <div class="form-group">
+            <label for="suburb">Suburb</label>
+            <input type="text" class="form-control" id="suburb" name="suburb"value={{user.suburb}}>
+          </div>
+
+          <div class="form-group">
+            <label for="postcode">Postcode</label>
+            <input type="text" class="form-control" id="postcode" name="postcode"value={{user.postcode}}>
+          </div>
+
+          <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" class="form-control" id="state" name="state"value={{user.state}}>
+          </div>
+
+          <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country" name="country"value={{user.country}}>
+          </div>
+
+          
+
+
+
+
+          
+          
+          <button type="submit" class="btn btn-primary">Submit changes</button>
+        </form>
+          
+          
+        </div>
+      </div>
+    </div>
+    
+    {{#if message }}
+      <h4 class="alert alert-danger mt-4">{{message}}</h4>
+    {{/if}}
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+</body>
+</html>

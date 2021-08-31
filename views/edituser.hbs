@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <nav>
+    <h4>Sri Vakrathunda Vinayagar Temple</h4>
+    <ul>
+      <li><a href="/">User Management</a></li>
+      <li><a href="/nomineetable"> Nominee Management</a></li>
+      <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header">
+        Edit Member Details
+      </div>
+      <div class="card-body">
+        <form action="/auth/edituser/{{user.id}}" method="POST">
+
+        
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value= {{user.title}} >
+          </div>
+
+          <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" class="form-control" id="firstname" name="firstname" value= {{user.firstname}}>
+          </div>
+
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" class="form-control" id="lastname" name="lastname" value= {{user.lastname}} >
+          </div>
+
+          <div class="form-group">
+            <label for="preferred_name">Preferred Name</label>
+            <input type="text" class="form-control" id="preferred_name" name="preferred_name" value= {{user.preferred_name}}>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" value= {{user.email}}>
+          </div>
+
+          <div class="form-group">
+            <label for="alternate_email">Alternate Email</label>
+            <input type="email" class="form-control" id="alternate_email" name="alternate_email" value= {{user.alternate_email}}>
+          </div>
+
+          <div class="form-group">
+            <label for="mobile">HP</label>
+            <input type="number" class="form-control" id="mobile" name="mobile" value= {{user.mobile}}>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="number" class="form-control" id="phone" name="phone" value= {{user.phone}}>
+          </div>
+
+          <div class="form-group">
+            <label for="DOB">Date of birth</label>
+            <input type="date" class="form-control" id="DOB" name="DOB" value= {{user.date_of_birth}}>
+          </div>
+
+          <div class="form-group">
+            <label for="membertype">Member Type</label>
+            <input type="text" class="form-control" id="membertype" name="membertype" value= {{user.membertype}}>
+          </div>
+
+          <div class="form-group">
+            <label for="memberno">Member Number</label>
+            <input type="number" class="form-control" id="memberno" name="memberno" value= {{user.member_no}}>
+          </div>
+
+          <div class="form-group">
+            <label for="datejoined">Date Joined</label>
+            <input type="date" class="form-control" id="datejoined" name="datejoined" value= {{user.date_joined}}>
+          </div>
+
+          <div class="form-group">
+            <label for="address1">Address 1</label>
+            <input type="text" class="form-control" id="address1" name="address1" value= {{user.address1}}>
+          </div>
+
+          <div class="form-group">
+            <label for="address2">Address 2</label>
+            <input type="text" class="form-control" id="address2" name="address2" value= {{user.address2}}>
+          </div>
+
+          <div class="form-group">
+            <label for="suburb">Suburb</label>
+            <input type="text" class="form-control" id="suburb" name="suburb" value= {{user.suburb}}>
+          </div>
+
+          <div class="form-group">
+            <label for="postcode">Postcode</label>
+            <input type="text" class="form-control" id="postcode" name="postcode" value= {{user.postcode}}>
+          </div>
+
+          <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" class="form-control" id="state" name="state" value= {{user.state}}>
+          </div>
+
+          <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country" name="country" value= {{user.country}}>
+          </div>
+
+          <div class="form-group">
+            <label for="status">Status</label>
+            <input type="text" class="form-control" id="status" name="status" value= {{user.status}}> 
+          </div>
+
+      
+          
+
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+
+        <form action="/auth/memberfile/{{user.id}}" method="POST" encType="multipart/form-data">
+         <h3>Upload Member document</h3>
+          <input type="file" name="memberFile" accept="image/*,application/pdf" />
+          <input type="submit" class="btn btn-primary">
+          </form>
+      </div>
+    </div>
+
+    {{#if user.member_file}}
+    <div class="col-6 ">
+    <a href="/download/{{user.id}}" type="button" class="btn btn-primary align-self-center">Download Member document</a>
+    </div>
+
+    {{/if}}
+
+    {{#if message }}
+      <h4 class="alert alert-danger mt-4">{{message}}</h4>
+    {{/if}}
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+</body>
+</html>
