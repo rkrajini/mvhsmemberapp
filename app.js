@@ -6,6 +6,12 @@ const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
 const port = process.env.PORT || 3000;
 
+var mysqlHost = process.env.MYSQL_HOST || 'localhost';
+var mysqlPort = process.env.MYSQL_PORT || '3306';
+var mysqlUser = process.env.MYSQL_USER || 'root';
+var mysqlPass = process.env.MYSQL_PASS || 'root';
+var mysqlDB   = process.env.MYSQL_DB   || 'node_db';
+
 //this required before view engine setup
 hbs.registerPartials(__dirname + '/views/partials');
 
@@ -17,10 +23,11 @@ hbs.registerPartials(__dirname + '/views/partials');
 const app = express();
 
 const db = mysql.createConnection({
-  host: 'mydatabaseservice.mysql.database.azure.com',
-  user: 'ganesha',
-  password: 'G@nesh@3154',
-  database: 'members'
+  host: mysqlUser,
+  port: mysqlPort,
+  user: mysqlUser,
+  password: mysqlPass,
+  database: mysqlDB
 });
 
 // app.use(fileUpload());
